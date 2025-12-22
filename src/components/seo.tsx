@@ -30,7 +30,7 @@ export function generateSEOMetadata({
     openGraph: {
       type: "website",
       locale: "en_IN",
-      url: "https://vkskcompany.com",
+      url: "https://vksk.co.in",
       title,
       description,
       siteName: "VKSK & Company",
@@ -50,7 +50,7 @@ export function generateSEOMetadata({
       images: [ogImage],
     },
     alternates: {
-      canonical: "https://vkskcompany.com",
+      canonical: "https://vksk.co.in",
     },
   };
 }
