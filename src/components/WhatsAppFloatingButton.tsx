@@ -3,7 +3,7 @@
 export default function WhatsAppFloatingButton() {
   return (
     <a
-      href="https://wa.me/917827295033?text=Hello%20VKSK%20Team%2C%20I%20would%20like%20to%20book%20a%20consultation."
+      href="https://wa.me/919911560588?text=Hello%20VKSK%20Team%2C%20I%20would%20like%20to%20book%20a%20consultation."
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
