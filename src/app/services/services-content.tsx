@@ -1,18 +1,18 @@
 "use client";
 
-import Link from "next/link";
-import { Typography, Card, CardBody } from "@material-tailwind/react";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/animations";
 import {
-  DocumentTextIcon,
+  BanknotesIcon,
+  BriefcaseIcon,
+  BuildingLibraryIcon,
   CalculatorIcon,
   ChartBarIcon,
-  BuildingLibraryIcon,
-  BriefcaseIcon,
-  BanknotesIcon,
-  ScaleIcon,
   DocumentMagnifyingGlassIcon,
+  DocumentTextIcon,
+  ScaleIcon,
 } from "@heroicons/react/24/solid";
+import { Card, CardBody, Typography } from "@material-tailwind/react";
+import Link from "next/link";
 
 const SERVICES = [
   {
@@ -174,7 +174,7 @@ export default function ServicesContent() {
               const Icon = service.icon;
               return (
                 <StaggerItem key={service.id}>
-                  <Link href={service.href}>
+                  
                     <Card className="h-full border border-gray-200 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 group">
                       <CardBody className="p-6">
                         <div
@@ -196,7 +196,6 @@ export default function ServicesContent() {
                         </div>
                       </CardBody>
                     </Card>
-                  </Link>
                 </StaggerItem>
               );
             })}
