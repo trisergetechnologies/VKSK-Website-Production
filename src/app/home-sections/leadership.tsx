@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Typography, Card, CardBody, Button } from "@material-tailwind/react";
+import { Typography, Button } from "@material-tailwind/react";
 import { FadeIn } from "@/components/animations";
 
 export default function Leadership() {
   return (
-    <section className="py-20 px-4 md:px-10 bg-white">
+    <section className="py-20 px-4 md:px-10 bg-white overflow-x-hidden">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <FadeIn direction="right">
@@ -15,6 +15,7 @@ export default function Leadership() {
               <Typography variant="h2" className="mb-6 font-bold text-gray-900">
                 Our Leadership
               </Typography>
+
               <Typography
                 variant="lead"
                 className="mb-6 text-gray-600 leading-relaxed"
@@ -24,11 +25,13 @@ export default function Leadership() {
                 Accountancy, he leads our team in delivering exceptional
                 financial solutions.
               </Typography>
+
               <Typography className="mb-8 text-gray-600">
                 Under his leadership, we have built a reputation for excellence,
                 integrity, and client-focused service delivery in the Indian
                 professional services landscape.
               </Typography>
+
               <Link href="/team">
                 <Button
                   className="bg-gradient-to-r from-primary to-secondary text-white shadow-glow-primary"
@@ -41,24 +44,22 @@ export default function Leadership() {
           </FadeIn>
 
           <FadeIn direction="left">
-            <div className="relative">
-              {/* Glass container */}
-              <div className="glass rounded-3xl shadow-2xl overflow-hidden">
-                {/* Gradient frame */}
-                <div className="relative aspect-square rounded-2xl overflow-hidden">
-                  {/* Background gradient (kept intact) */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20" />
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10" />
+            <div className="relative flex justify-center lg:justify-end">
+              {/* 🔒 Width + aspect locked BEFORE image load */}
+              <div className="relative w-full max-w-sm sm:max-w-md aspect-square rounded-3xl overflow-hidden shadow-2xl glass">
+                {/* Background gradients */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20" />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10" />
 
-                  {/* Image covers full container */}
-                  <Image
-                    src="/image/vksk-owner.png"
-                    alt="VKSK & Company"
-                    fill
-                    className="object-cover object-center"
-                    priority
-                  />
-                </div>
+                {/* Image */}
+                <Image
+                  src="/image/vksk-owner.png"
+                  alt="VKSK & Company"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 768px) 90vw, 420px"
+                  priority
+                />
               </div>
 
               {/* Ambient glow */}
@@ -70,4 +71,3 @@ export default function Leadership() {
     </section>
   );
 }
-
