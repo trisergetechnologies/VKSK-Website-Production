@@ -1,6 +1,6 @@
 import { Navbar, Footer } from "@/components";
 import { generateSEOMetadata } from "@/components/seo";
-import TeamContent from "./team-content";
+import TeamContent from "../about/team-content";
 
 export const metadata = generateSEOMetadata({
   title: "Our Team - VKSK & Company | Expert Chartered Accountants",

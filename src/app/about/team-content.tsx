@@ -12,6 +12,12 @@ import {
   BriefcaseIcon,
   ChartBarIcon,
 } from "@heroicons/react/24/solid";
+import {
+  ScrollReveal,
+  Parallax,
+} from "@/components/enhanced-animations";
+import { SparklesIcon } from "@heroicons/react/24/solid";
+import { motion } from "framer-motion";
 
 const TEAM_MEMBERS = [
   {
@@ -59,19 +65,51 @@ const TEAM_STRUCTURE = [
 export default function TeamContent() {
   return (
     <div className="min-h-screen">
-      {/* Hero */}
-      <section className="relative py-24 px-4 md:px-10 bg-gradient-to-br from-primary/10 via-white to-secondary/10">
-        <FadeIn direction="up">
-          <div className="container mx-auto text-center max-w-4xl">
-            <Typography variant="h1" className="mb-6 font-extrabold">
-              Our Team
-            </Typography>
-            <Typography className="text-lg text-gray-700">
-              A strong team of Chartered Accountants and professionals committed
-              to accuracy, compliance, and long-term value creation.
-            </Typography>
+        {/* HERO */}
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary/20 via-white via-secondary/10 to-accent/20">
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div
+            className="absolute top-20 left-10 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
+            animate={{ scale: [1, 1.3, 1], x: [0, 100, 0], y: [0, 50, 0] }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
+
+        <Parallax speed={0.3}>
+          <div className="container mx-auto px-4 md:px-10 relative z-10">
+            <ScrollReveal direction="fade">
+              <div className="text-center max-w-4xl mx-auto">
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.8, type: "spring" }}
+                  className="inline-flex w-20 h-20 rounded-2xl bg-gradient-to-br from-primary via-secondary to-accent mb-8 shadow-2xl items-center justify-center"
+                >
+                  <SparklesIcon className="w-10 h-10 text-white" />
+                </motion.div>
+
+                <Typography variant="h1" className="mb-6 font-bold">
+                  About{" "}
+                  <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                    VKSK & Company
+                  </span>
+                </Typography>
+                {/* Subtitle */}
+                <motion.div
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.9, delay: 0.4 }}
+                >
+                  <Typography className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                    A legacy of trust, professional excellence, and ethical
+                    leadership — empowering individuals and enterprises to grow
+                    with confidence in a rapidly evolving financial world.
+                  </Typography>
+                </motion.div>
+              </div>
+            </ScrollReveal>
           </div>
-        </FadeIn>
+        </Parallax>
       </section>
 
       {/* Leadership */}

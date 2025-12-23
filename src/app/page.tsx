@@ -6,6 +6,8 @@ import Leadership from "./home-sections/leadership";
 import VisionMission from "./home-sections/vision-mission";
 import CTASection from "./home-sections/cta-section";
 import { Footer, Navbar } from "@/components";
+import NewsCard from "@/components/news/NewsCard";
+import NewsUpdates from "@/components/news/NewsUpdates";
 
 export const metadata = generateSEOMetadata({
   title: "VKSK & Company - Chartered Accountants | Premium CA Services",
@@ -18,11 +20,12 @@ export default function Home() {
     <>
       <Navbar />
       <Hero />
+      <Leadership />
       <ServicesOverview />
       <WhyVKSK />
-      <Leadership />
       <VisionMission />
       <CTASection />
+      <NewsUpdates />
       <Footer />
       
     </>

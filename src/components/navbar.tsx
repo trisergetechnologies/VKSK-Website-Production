@@ -17,48 +17,35 @@ import {
 import { motion } from "framer-motion";
 
 const NAV_MENU = [
-  {
-    name: "Home",
-    href: "/",
-  },
-  {
-    name: "About Us",
-    href: "/about",
-  },
-  {
-    name: "Services",
-    href: "/services",
-  },
-  {
-    name: "Team",
-    href: "/team",
-  },
-  {
-    name: "Contact",
-    href: "/contact",
-  },
+  { name: "Home", href: "/" },
+  { name: "About Us", href: "/about" },
+  { name: "Buy DSC", href: "/dsc" },
+  { name: "Services", href: "/services" },
+  { name: "Latest News", href: "/#news-updates" },
+  { name: "Contact", href: "/contact" },
 ];
 
 interface NavItemProps {
   href: string;
   children: React.ReactNode;
   isActive?: boolean;
+  onClick?: () => void;
 }
 
-function NavItem({ href, children, isActive }: NavItemProps) {
+function NavItem({ href, children, isActive, onClick }: NavItemProps) {
   return (
     <li>
-      <Link href={href}>
-      <Typography
-        variant="paragraph"
+      <Link href={href} onClick={onClick}>
+        <Typography
+          variant="paragraph"
           className={`flex items-center gap-2 font-medium transition-colors ${
             isActive
               ? "text-primary font-semibold"
               : "text-gray-700 hover:text-primary"
           }`}
-      >
-        {children}
-      </Typography>
+        >
+          {children}
+        </Typography>
       </Link>
     </li>
   );
@@ -78,6 +65,13 @@ export function Navbar() {
       () => window.innerWidth >= 960 && setOpen(false)
     );
   }, []);
+
+  /** ✅ Correct active state handling (supports hash links) */
+  const isActiveLink = (href: string) => {
+    if (href === "/") return pathname === "/";
+    if (href.startsWith("/#")) return pathname === "/";
+    return pathname === href;
+  };
 
   return (
     <motion.div
@@ -100,13 +94,20 @@ export function Navbar() {
                 className="h-8 md:h-10 object-contain"
               />
             </Link>
+
+            {/* Desktop Menu */}
             <ul className="ml-10 hidden items-center gap-8 lg:flex">
               {NAV_MENU.map(({ name, href }) => (
-                <NavItem key={name} href={href} isActive={pathname === href}>
+                <NavItem
+                  key={name}
+                  href={href}
+                  isActive={isActiveLink(href)}
+                >
                   {name}
                 </NavItem>
               ))}
             </ul>
+
             <div className="hidden items-center gap-4 lg:flex">
               <Link href="/contact">
                 <Button
@@ -117,6 +118,7 @@ export function Navbar() {
                 </Button>
               </Link>
             </div>
+
             <IconButton
               variant="text"
               color="gray"
@@ -130,17 +132,25 @@ export function Navbar() {
               )}
             </IconButton>
           </div>
+
+          {/* Mobile Menu */}
           <Collapse open={open}>
             <div className="container mx-auto mt-3 border-t border-gray-200 px-2 pt-4">
               <ul className="flex flex-col gap-4">
                 {NAV_MENU.map(({ name, href }) => (
-                  <NavItem key={name} href={href} isActive={pathname === href}>
+                  <NavItem
+                    key={name}
+                    href={href}
+                    isActive={isActiveLink(href)}
+                    onClick={() => setOpen(false)}
+                  >
                     {name}
                   </NavItem>
                 ))}
               </ul>
+
               <div className="mt-6 mb-4 flex items-center gap-4">
-                <Link href="/contact" className="w-full">
+                <Link href="/contact" className="w-full" onClick={() => setOpen(false)}>
                   <Button
                     className="w-full bg-gradient-to-r from-primary to-secondary text-white"
                     size="md"

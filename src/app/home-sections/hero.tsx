@@ -122,7 +122,7 @@ export default function Hero() {
                 {/* Floating badges – mobile safe */}
                 <div className="absolute -right-2 sm:-right-6 -bottom-2 sm:-bottom-6 bg-white/90 backdrop-blur-md rounded-xl p-3 sm:p-4 border border-primary/20 shadow-xl">
                   <p className="text-xs sm:text-sm font-bold text-green-600">
-                    +91 8800198276
+                    +91 9911560588
                   </p>
                 </div>
 
