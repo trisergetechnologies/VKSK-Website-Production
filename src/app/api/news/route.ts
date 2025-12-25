@@ -18,6 +18,7 @@ async function fetchHTML(url: string): Promise<string> {
       "User-Agent":
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
       Accept: "text/html",
+      "Accept-Language": "en-IN,en;q=0.9",
     },
     cache: "no-store",
   });
@@ -97,7 +98,37 @@ export async function GET() {
       getMCANews(),
     ]);
 
-    const allNews = [...incomeTax, ...mca];
+    const allNews: NewsItem[] = [...incomeTax, ...mca];
+
+    /**
+     * ✅ PRODUCTION FALLBACK
+     * Govt sites often block cloud IPs (Vercel/AWS).
+     * If scraping returns empty in production,
+     * show official links instead of empty UI.
+     */
+    if (process.env.NODE_ENV === "production" && allNews.length === 0) {
+      return NextResponse.json(
+        [
+          {
+            title:
+              "Visit Income Tax Department portal for latest official notifications",
+            link: "https://www.incometax.gov.in/iec/foportal/latest-news",
+            source: "Income Tax Department",
+          },
+          {
+            title:
+              "Visit MCA portal for latest company law notifications and updates",
+            link: "https://www.mca.gov.in/content/mca/global/en/notifications-tender/news-updates/latest-news.html",
+            source: "MCA (Ministry of Corporate Affairs)",
+          },
+        ],
+        {
+          headers: {
+            "Cache-Control": "s-maxage=21600, stale-while-revalidate",
+          },
+        }
+      );
+    }
 
     return NextResponse.json(allNews, {
       headers: {
@@ -106,6 +137,8 @@ export async function GET() {
     });
   } catch (error) {
     console.error("News API error:", error);
+
+    // Absolute safety fallback
     return NextResponse.json([]);
   }
 }
