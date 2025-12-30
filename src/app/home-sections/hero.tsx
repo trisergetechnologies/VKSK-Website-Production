@@ -110,7 +110,7 @@ export default function Hero() {
               >
                 <div className="glass rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/20">
                   <Image
-                    src="/image/logos/vksklogo.jpg"
+                    src="/image/logos/CA-Logo.png"
                     alt="VKSK & Company"
                     width={500}
                     height={500}
@@ -122,13 +122,13 @@ export default function Hero() {
                 {/* Floating badges – mobile safe */}
                 <div className="absolute -right-2 sm:-right-6 -bottom-2 sm:-bottom-6 bg-white/90 backdrop-blur-md rounded-xl p-3 sm:p-4 border border-primary/20 shadow-xl">
                   <p className="text-xs sm:text-sm font-bold text-green-600">
-                    +91 9911560588
+                    Contact Us <br/> +91 9911560588
                   </p>
                 </div>
 
                 <div className="absolute -left-2 sm:-left-6 -top-2 sm:-top-6 bg-white/90 backdrop-blur-md rounded-xl p-3 sm:p-4 border border-primary/20 shadow-xl">
                   <p className="text-xs sm:text-sm font-bold text-primary">
-                    Trusted
+                    Trusted<br/>Firm
                   </p>
                 </div>
               </motion.div>

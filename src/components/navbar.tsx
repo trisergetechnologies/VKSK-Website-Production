@@ -8,14 +8,15 @@ import {
   Collapse,
   Button,
   IconButton,
-  Typography,
 } from "@material-tailwind/react";
 import {
   XMarkIcon,
   Bars3Icon,
+  ChevronDownIcon,
 } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 
+/* ------------------ Main Nav Menu ------------------ */
 const NAV_MENU = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
@@ -25,6 +26,15 @@ const NAV_MENU = [
   { name: "Contact", href: "/contact" },
 ];
 
+/* ------------------ Quick Links ------------------ */
+const QUICK_LINKS = [
+  { name: "GST Portal", href: "https://www.gst.gov.in" },
+  { name: "Income Tax e-Filing", href: "https://www.incometax.gov.in" },
+  { name: "CBIC", href: "https://www.cbic.gov.in" },
+  { name: "ICAI", href: "https://www.icai.org" },
+  { name: "C&AG (CIG)", href: "https://cag.gov.in" },
+];
+
 interface NavItemProps {
   href: string;
   children: React.ReactNode;
@@ -32,41 +42,44 @@ interface NavItemProps {
   onClick?: () => void;
 }
 
+/* ------------------ FIXED NavItem ------------------ */
 function NavItem({ href, children, isActive, onClick }: NavItemProps) {
   return (
     <li>
-      <Link href={href} onClick={onClick}>
-        <Typography
-          variant="paragraph"
-          className={`flex items-center gap-2 font-medium transition-colors ${
-            isActive
-              ? "text-primary font-semibold"
-              : "text-gray-700 hover:text-primary"
-          }`}
+      <Link
+        href={href}
+        onClick={onClick}
+        className="block"
+      >
+        <span
+          className={`
+            flex items-center gap-2 font-medium transition-colors
+            text-black
+            hover:text-primary
+            active:text-primary
+            focus:text-primary
+            ${isActive ? "font-semibold text-primary" : ""}
+          `}
         >
           {children}
-        </Typography>
+        </span>
       </Link>
     </li>
   );
 }
 
+
 export function Navbar() {
   const [open, setOpen] = React.useState(false);
+  const [quickOpen, setQuickOpen] = React.useState(false);
   const pathname = usePathname();
 
-  function handleOpen() {
-    setOpen((cur) => !cur);
-  }
-
   React.useEffect(() => {
-    window.addEventListener(
-      "resize",
-      () => window.innerWidth >= 960 && setOpen(false)
-    );
+    const resizeHandler = () => window.innerWidth >= 960 && setOpen(false);
+    window.addEventListener("resize", resizeHandler);
+    return () => window.removeEventListener("resize", resizeHandler);
   }, []);
 
-  /** ✅ Correct active state handling (supports hash links) */
   const isActiveLink = (href: string) => {
     if (href === "/") return pathname === "/";
     if (href.startsWith("/#")) return pathname === "/";
@@ -84,7 +97,7 @@ export function Navbar() {
         <MTNavbar
           blurred
           color="white"
-          className="z-50 mt-6 relative border-0 pr-3 py-3 pl-6 shadow-lg shadow-primary/10 glass"
+          className="z-50 mt-6 border-0 pr-3 py-3 pl-6 shadow-lg shadow-primary/10 glass"
         >
           <div className="flex items-center justify-between">
             <Link href="/">
@@ -95,7 +108,7 @@ export function Navbar() {
               />
             </Link>
 
-            {/* Desktop Menu */}
+            {/* ---------------- Desktop Menu ---------------- */}
             <ul className="ml-10 hidden items-center gap-8 lg:flex">
               {NAV_MENU.map(({ name, href }) => (
                 <NavItem
@@ -106,12 +119,40 @@ export function Navbar() {
                   {name}
                 </NavItem>
               ))}
+
+              {/* Quick Links (Pure Tailwind) */}
+              <li className="relative">
+                <button
+                  onClick={() => setQuickOpen(!quickOpen)}
+                  className="flex items-center gap-1 font-medium text-black hover:text-primary"
+                >
+                  Quick Links
+                  <ChevronDownIcon className="h-4 w-4" />
+                </button>
+
+                {quickOpen && (
+                  <ul className="absolute left-0 top-full mt-3 w-60 rounded-xl bg-white shadow-lg border border-gray-100 z-50">
+                    {QUICK_LINKS.map((link) => (
+                      <li key={link.name}>
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block px-4 py-3 font-medium text-black hover:bg-gray-50 hover:text-primary"
+                        >
+                          {link.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
             </ul>
 
             <div className="hidden items-center gap-4 lg:flex">
               <Link href="/contact">
                 <Button
-                  className="bg-gradient-to-r from-primary to-secondary text-white shadow-glow-primary hover:shadow-glow-secondary transition-all"
+                  className="bg-gradient-to-r from-primary to-secondary text-white"
                   size="md"
                 >
                   Get Consultation
@@ -122,20 +163,20 @@ export function Navbar() {
             <IconButton
               variant="text"
               color="gray"
-              onClick={handleOpen}
-              className="ml-auto inline-block lg:hidden"
+              onClick={() => setOpen(!open)}
+              className="ml-auto lg:hidden"
             >
               {open ? (
-                <XMarkIcon strokeWidth={2} className="h-6 w-6" />
+                <XMarkIcon className="h-6 w-6" />
               ) : (
-                <Bars3Icon strokeWidth={2} className="h-6 w-6" />
+                <Bars3Icon className="h-6 w-6" />
               )}
             </IconButton>
           </div>
 
-          {/* Mobile Menu */}
+          {/* ---------------- Mobile Menu ---------------- */}
           <Collapse open={open}>
-            <div className="container mx-auto mt-3 border-t border-gray-200 px-2 pt-4">
+            <div className="mt-4 border-t border-gray-200 pt-4">
               <ul className="flex flex-col gap-4">
                 {NAV_MENU.map(({ name, href }) => (
                   <NavItem
@@ -147,14 +188,42 @@ export function Navbar() {
                     {name}
                   </NavItem>
                 ))}
+
+                <li>
+                  <button
+                    onClick={() => setQuickOpen(!quickOpen)}
+                    className="flex w-full items-center justify-between font-normal text-black"
+                  >
+                    Quick Links
+                    <ChevronDownIcon
+                      className={`h-4 w-4 transition-transform ${
+                        quickOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {quickOpen && (
+                    <ul className="mt-3 ml-3 border-l border-gray-200 pl-4 space-y-3">
+                      {QUICK_LINKS.map((link) => (
+                        <li key={link.name}>
+                          <a
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm font-normal text-black hover:text-primary"
+                          >
+                            {link.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
               </ul>
 
-              <div className="mt-6 mb-4 flex items-center gap-4">
-                <Link href="/contact" className="w-full" onClick={() => setOpen(false)}>
-                  <Button
-                    className="w-full bg-gradient-to-r from-primary to-secondary text-white"
-                    size="md"
-                  >
+              <div className="mt-6">
+                <Link href="/contact" onClick={() => setOpen(false)}>
+                  <Button className="w-full bg-gradient-to-r from-primary to-secondary text-white">
                     Get Consultation
                   </Button>
                 </Link>

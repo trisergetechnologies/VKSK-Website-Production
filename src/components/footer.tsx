@@ -26,8 +26,7 @@ const FIRM_INFO = {
   registration: "040721N",
   established: "26-12-2022",
   address:
-    "A-110 Ground Floor, Gate No. 4, Swasthya Vihar, Near Preet Vihar, New Delhi-110092",
-  pan: "AAWFV4339D",
+    "A-196/1B, Shri Ram Nagar, Nearby Punjab National Bank, Shahdara, New Delhi-110092",
   email: "vkskoffice@gmail.com",
   phone: "+91-9911565237",
 };
@@ -56,9 +55,6 @@ export function Footer() {
               </Typography>
               <Typography className="text-gray-600 text-sm mb-2">
                 Reg. No.: {FIRM_INFO.registration}
-              </Typography>
-              <Typography className="text-gray-600 text-sm">
-                PAN: {FIRM_INFO.pan}
               </Typography>
 
               <Typography className="mt-5 text-gray-700 text-sm leading-relaxed">
