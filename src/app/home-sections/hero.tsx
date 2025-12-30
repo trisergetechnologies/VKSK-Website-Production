@@ -110,7 +110,7 @@ export default function Hero() {
               >
                 <div className="glass rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/20">
                   <Image
-                    src="/image/logos/CA-Logo.png"
+                    src="/image/logos/vksklogo.jpg"
                     alt="VKSK & Company"
                     width={500}
                     height={500}
