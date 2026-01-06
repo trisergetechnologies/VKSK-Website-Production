@@ -12,7 +12,7 @@ import { FormInput, FormTextarea } from "../../components/form/FormInput";
 
 const CONTACT_INFO = {
   address:
-    "A-110 Ground Floor, Gate No. 4, Swasthya Vihar, Near Preet Vihar, New Delhi-110032",
+    "Flat No:196/1B Shri Ram Nagar Near by Punjab National Bank Shahdara New Delhi - 110032",
   email: "vkskoffice@gmail.com",
   phone: "+91-9911565237",
   hours: "Monday - Saturday: 11:00 AM - 8:00 PM",
@@ -105,7 +105,7 @@ export default function ContactContent() {
                   <CardBody className="p-0 h-full">
                     <iframe
                       title="VKSK Office Location"
-                      src="https://www.google.com/maps?q=A-110%20Ground%20Floor,%20Gate%20No.%204,%20Swasthya%20Vihar,%20Near%20Preet%20Vihar,%20New%20Delhi-110032&output=embed"
+                      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14006.481353496504!2d77.2935194!3d28.6750622!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfb57c0000001:0x18e90285410bd02!2sV%20K%20S%20K%20%26%20COMPANY!5e0!3m2!1sen!2sin!4v1733740000000"
                       className="w-full h-full border-0"
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
