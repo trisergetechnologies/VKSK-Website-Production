@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { FadeIn } from "@/components/animations";
 import {
-  Typography,
+  Button,
   Card,
   CardBody,
-  Button,
+  Typography,
 } from "@material-tailwind/react";
-import { FadeIn } from "@/components/animations";
+import { useState } from "react";
 import { FormInput, FormTextarea } from "../../components/form/FormInput";
 
 const CONTACT_INFO = {
@@ -105,7 +105,7 @@ export default function ContactContent() {
                   <CardBody className="p-0 h-full">
                     <iframe
                       title="VKSK Office Location"
-                      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14006.481353496504!2d77.2935194!3d28.6750622!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfb57c0000001:0x18e90285410bd02!2sV%20K%20S%20K%20%26%20COMPANY!5e0!3m2!1sen!2sin!4v1733740000000"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.4874367324005!2d77.29351940000001!3d28.675062200000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfb57c0000001%3A0x18e90285410bd02!2sV%20K%20S%20K%20%26%20COMPANY!5e0!3m2!1sen!2sin!4v1767689500582!5m2!1sen!2sin"
                       className="w-full h-full border-0"
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
