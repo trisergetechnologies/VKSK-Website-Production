@@ -1,25 +1,28 @@
 "use client";
 
 import { useState } from "react";
-import { Typography, Card, CardBody, Input, Textarea, Button } from "@material-tailwind/react";
+import {
+  Typography,
+  Card,
+  CardBody,
+  Button,
+} from "@material-tailwind/react";
 import { FadeIn } from "@/components/animations";
 import { FormInput, FormTextarea } from "../../components/form/FormInput";
-import {
-  MapPinIcon,
-  EnvelopeIcon,
-  PhoneIcon,
-  ClockIcon,
-} from "@heroicons/react/24/solid";
 
 const CONTACT_INFO = {
-  address: "A-110 Ground Floor, Gate No. 4, Swasthya Vihar, Near Preet Vihar, New Delhi-110092",
+  address:
+    "A-110 Ground Floor, Gate No. 4, Swasthya Vihar, Near Preet Vihar, New Delhi-110032",
   email: "vkskoffice@gmail.com",
   phone: "+91-9911565237",
   hours: "Monday - Saturday: 11:00 AM - 8:00 PM",
 };
 
 export default function ContactContent() {
-  const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(null);
+  const [submitStatus, setSubmitStatus] = useState<
+    "success" | "error" | null
+  >(null);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -29,35 +32,31 @@ export default function ContactContent() {
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+    e.preventDefault();
 
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-  try {
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
+      if (!res.ok) throw new Error("Failed");
 
-    if (!res.ok) throw new Error("Failed");
-
-    setSubmitStatus("success");
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      subject: "",
-      message: "",
-    });
-  } catch {
-    setSubmitStatus("error");
-  } finally {
-    setTimeout(() => setSubmitStatus(null), 4000);
-  }
-};
-
-
-
+      setSubmitStatus("success");
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+    } catch {
+      setSubmitStatus("error");
+    } finally {
+      setTimeout(() => setSubmitStatus(null), 4000);
+    }
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -92,125 +91,51 @@ export default function ContactContent() {
       <section className="py-16 px-4 md:px-10 bg-white">
         <div className="container mx-auto max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Info */}
+            {/* GOOGLE MAP */}
             <FadeIn direction="right">
-              <div>
+              <div className="flex flex-col h-full">
                 <Typography
                   variant="h3"
                   className="mb-8 font-bold text-gray-900"
                 >
-                  Get In Touch
+                  Visit Our Office
                 </Typography>
-                <div className="space-y-6">
-                  <Card className="border border-gray-200 hover:shadow-lg transition-shadow">
-                    <CardBody className="p-6">
-                      <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0">
-                          <MapPinIcon className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                          <Typography
-                            variant="h6"
-                            className="mb-2 font-semibold text-gray-900"
-                          >
-                            Address
-                          </Typography>
-                          <Typography className="text-gray-600">
-                            {CONTACT_INFO.address}
-                          </Typography>
-                        </div>
-                      </div>
-                    </CardBody>
-                  </Card>
 
-                  <Card className="border border-gray-200 hover:shadow-lg transition-shadow">
-                    <CardBody className="p-6">
-                      <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-secondary to-accent flex items-center justify-center flex-shrink-0">
-                          <EnvelopeIcon className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                          <Typography
-                            variant="h6"
-                            className="mb-2 font-semibold text-gray-900"
-                          >
-                            Email
-                          </Typography>
-                          <Typography className="text-gray-600">
-                            <a
-                              href={`mailto:${CONTACT_INFO.email}`}
-                              className="hover:text-primary transition-colors"
-                            >
-                              {CONTACT_INFO.email}
-                            </a>
-                          </Typography>
-                        </div>
-                      </div>
-                    </CardBody>
-                  </Card>
+                <Card className="border border-gray-200 shadow-xl overflow-hidden h-[520px]">
+                  <CardBody className="p-0 h-full">
+                    <iframe
+                      title="VKSK Office Location"
+                      src="https://www.google.com/maps?q=A-110%20Ground%20Floor,%20Gate%20No.%204,%20Swasthya%20Vihar,%20Near%20Preet%20Vihar,%20New%20Delhi-110032&output=embed"
+                      className="w-full h-full border-0"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+                  </CardBody>
+                </Card>
 
-                  <Card className="border border-gray-200 hover:shadow-lg transition-shadow">
-                    <CardBody className="p-6">
-                      <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-accent to-primary flex items-center justify-center flex-shrink-0">
-                          <PhoneIcon className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                          <Typography
-                            variant="h6"
-                            className="mb-2 font-semibold text-gray-900"
-                          >
-                            Phone
-                          </Typography>
-                          <Typography className="text-gray-600">
-                            <a
-                              href={`tel:${CONTACT_INFO.phone}`}
-                              className="hover:text-primary transition-colors"
-                            >
-                              {CONTACT_INFO.phone}
-                            </a>
-                          </Typography>
-                        </div>
-                      </div>
-                    </CardBody>
-                  </Card>
-
-                  <Card className="border border-gray-200 hover:shadow-lg transition-shadow">
-                    <CardBody className="p-6">
-                      <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0">
-                          <ClockIcon className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                          <Typography
-                            variant="h6"
-                            className="mb-2 font-semibold text-gray-900"
-                          >
-                            Business Hours
-                          </Typography>
-                          <Typography className="text-gray-600">
-                            {CONTACT_INFO.hours}
-                          </Typography>
-                        </div>
-                      </div>
-                    </CardBody>
-                  </Card>
-                </div>
+                <Typography className="mt-4 text-sm text-gray-600">
+                  {CONTACT_INFO.address}
+                </Typography>
               </div>
             </FadeIn>
 
-            {/* Contact Form */}
+            {/* CONTACT FORM */}
             <FadeIn direction="left">
-              <div>
+              <div className="flex flex-col h-full">
                 <Typography
                   variant="h3"
                   className="mb-8 font-bold text-gray-900"
                 >
                   Send Us a Message
                 </Typography>
-                <Card className="border border-gray-200 shadow-xl">
-                  <CardBody className="p-8">
-                    <form onSubmit={handleSubmit} className="space-y-6">
+
+                <Card className="border border-gray-200 shadow-xl h-[520px] flex flex-col">
+                  <CardBody className="p-8 flex flex-col h-full">
+                    {/* SCROLLABLE FORM AREA */}
+                    <form
+                      onSubmit={handleSubmit}
+                      className="flex-1 overflow-y-auto space-y-6 pr-2"
+                    >
                       <FormInput
                         label="Your Name"
                         name="name"
@@ -252,26 +177,33 @@ export default function ContactContent() {
                         onChange={handleChange}
                         required
                       />
+                    </form>
+
+                    {/* FIXED ACTION AREA */}
+                    <div className="pt-4">
                       <Button
                         type="submit"
-                        className="w-full bg-gradient-to-r from-primary to-secondary text-white shadow-glow-primary hover:shadow-glow-secondary"
                         size="lg"
+                        className="w-full bg-gradient-to-r from-primary to-secondary text-white shadow-glow-primary hover:shadow-glow-secondary"
                       >
                         Send Message
                       </Button>
 
-                      {/* Submission status message */}
                       {submitStatus && (
                         <div
                           className={`mt-4 rounded-lg px-4 py-3 text-sm font-medium text-center
-                        ${submitStatus === "success" ? "bg-green-50 text-green-700 border border-green-200" : "bg-red-50 text-red-700 border border-red-200"}`}
+                          ${
+                            submitStatus === "success"
+                              ? "bg-green-50 text-green-700 border border-green-200"
+                              : "bg-red-50 text-red-700 border border-red-200"
+                          }`}
                         >
                           {submitStatus === "success"
                             ? "Message sent successfully. We will contact you shortly."
                             : "There is some problem. Please try again later."}
                         </div>
                       )}
-                    </form>
+                    </div>
                   </CardBody>
                 </Card>
               </div>
@@ -282,4 +214,3 @@ export default function ContactContent() {
     </div>
   );
 }
-

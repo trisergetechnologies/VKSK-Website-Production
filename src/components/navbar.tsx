@@ -23,6 +23,7 @@ const NAV_MENU = [
   { name: "Buy DSC", href: "/dsc" },
   { name: "Services", href: "/services" },
   { name: "Latest News", href: "/#news-updates" },
+  { name: "Career", href: "/careers" },
   { name: "Contact", href: "/contact" },
 ];
 

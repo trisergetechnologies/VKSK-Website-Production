@@ -2,6 +2,7 @@ import { Navbar, Footer } from "@/components";
 import { generateSEOMetadata } from "@/components/seo";
 import AboutContent from "./about-content";
 import TeamContent from "./team-content";
+import LeadershipCards from "./team-structure";
 
 export const metadata = generateSEOMetadata({
   title: "About Us - VKSK & Company | Chartered Accountants",
@@ -14,6 +15,7 @@ export default function AboutPage() {
     <>
       <Navbar />
       <TeamContent />
+      {/* <LeadershipCards /> */}
       <AboutContent />
       <Footer />
     </>

@@ -26,7 +26,7 @@ const FIRM_INFO = {
   registration: "040721N",
   established: "26-12-2022",
   address:
-    "A-196/1B, Shri Ram Nagar, Nearby Punjab National Bank, Shahdara, New Delhi-110092",
+    "A-196/1B, Shri Ram Nagar, Nearby Punjab National Bank, Shahdara, New Delhi-110032",
   email: "vkskoffice@gmail.com",
   phone: "+91-9911565237",
 };
