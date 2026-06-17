@@ -41,7 +41,7 @@ const TEAM_MEMBERS = [
 
 const ADDITIONAL_LEADERS = [
   {
-    name: "Sikander Sahu",
+    name: "Manish Kumar",
     designation: "Partner",
     image: "/image/logos/profile3d.jpg",
     summary:
